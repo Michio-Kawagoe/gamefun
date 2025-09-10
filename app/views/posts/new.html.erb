@@ -1,0 +1,23 @@
+<h1>新規投稿</h1>
+
+<%= form_with model: @post do |f| %>
+  <h4>タイトル</h4>
+  <%= f.text_field :title %>
+
+  <h4>本文</h4>
+  <%= f.text_area :body %>
+
+  <%= f.submit '投稿' %>
+<% end %>
+
+<% if @post.errors.any? %>
+  <h2>エラー</h2>
+  <ul>
+    <% @post.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h2>フォームに入力されたデータ</h2>
+<%= debug @post %>
