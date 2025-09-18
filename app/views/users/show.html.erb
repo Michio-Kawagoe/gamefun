@@ -1,0 +1,19 @@
+<h1>ユーザー詳細画面</h1>
+
+<div>
+  <h3><%= @user.name %></h3>
+  <%= image_tag @user.get_profile_image(100, 100) %>
+  <% if @user == current_user %>
+    <p><%= link_to "プロフィール編集", edit_user_path(@user) %>
+  <% end %>
+</div>
+
+<h2>ユーザーの投稿一覧</h2>
+
+<% @post.each do |post| %>
+  <div>
+    <p>タイトル：<%= post.title %></p>
+    <p>本文：<%= post.body %></p>
+    <p>ユーザーネーム：<%= post.user.name %></p>
+  </div>
+<% end %>
