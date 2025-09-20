@@ -8,6 +8,11 @@
   <% end %>
 </div>
 
+<% if @user == current_user %>
+  <%= link_to "退会", root_path, method: :delete, data: { confirm: '本当に退会しますか？' }%>
+<% end %>
+
+
 <h2>ユーザーの投稿一覧</h2>
 
 <% @post.each do |post| %>
