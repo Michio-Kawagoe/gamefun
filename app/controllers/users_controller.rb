@@ -2,6 +2,7 @@ class UsersController < ApplicationController
 
     def mypage
       @user = current_user
+      @posts = @user.posts
     end
 
     def show
@@ -11,12 +12,18 @@ class UsersController < ApplicationController
 
     def edit
       @user = User.find(params[:id])
+      if current_user != @user
+        redirect_to mypage_path
+      end
     end
 
     def update
       @user = User.find(params[:id])
-      @user.update(user_params)
-      redirect_to user_path(current_user)
+      if @user.update(user_params)
+        redirect_to mypage_path, notice: 'ユーザー情報が更新されました。'
+      else
+        render 'edit'
+      end
     end
 
     def destroy
